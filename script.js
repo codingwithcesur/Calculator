@@ -15,7 +15,10 @@ numbers.forEach((number) => {
       clear();
       somethingWentWrong = false;
     }
-    if (displayOperations.textContent === "Enter a number") {
+    if (
+      displayOperations.textContent === "Enter a number" ||
+      displayOperations.textContent === "Stop trying to divide 0 by 0"
+    ) {
       displayOperations.textContent = "";
     }
 
@@ -25,6 +28,12 @@ numbers.forEach((number) => {
 });
 operators.forEach((operator) => {
   operator.addEventListener("click", () => {
+    if (
+      displayOperations.textContent === "Enter a number" ||
+      displayOperations.textContent === "Stop trying to divide 0 by 0"
+    ) {
+      displayOperations.textContent = "";
+    }
     if (value2 !== "") {
       value1 = operate(value1, value2);
       value2 = "";
@@ -61,6 +70,9 @@ function divide(b, a) {
   return +(a / b);
 }
 function operate(num1, num2) {
+  if (num1 === "0" && num2 === "0") {
+    return (displayOperations.textContent = "Stop trying to divide 0 by 0");
+  }
   if (currentOperator === "add") {
     return (displayOperations.textContent = add(+num1, +num2));
   } else if (currentOperator === "subtract") {
