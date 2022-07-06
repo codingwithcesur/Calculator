@@ -2,14 +2,17 @@ const numbers = document.querySelectorAll(".number");
 const operators = document.querySelectorAll(".operator");
 const displayOperations = document.getElementById("display-operation");
 const equals = document.querySelector(".equal");
+const clearBtn = document.querySelector(".clear");
 let value1 = "";
 let value2 = "";
 let currentOperator = "";
+clearBtn.addEventListener("click", clear);
 numbers.forEach((number) => {
   number.addEventListener("click", () => {
-    if (displayOperations.textContent == "Enter a number") {
+    if (displayOperations.textContent === "Enter a number") {
       displayOperations.textContent = "";
     }
+
     displayOperations.textContent += number.textContent;
     value1 += number.textContent;
   });
@@ -31,6 +34,11 @@ equals.addEventListener("click", () => {
   operate(value1, value2);
 });
 
+function clear() {
+  value1 = "";
+  value2 = "";
+  displayOperations.textContent = "Enter a number";
+}
 function add(b, a) {
   return +(a + b);
 }
@@ -44,13 +52,13 @@ function divide(b, a) {
   return +(a / b);
 }
 function operate(num1, num2) {
-  if (currentOperator == "add") {
+  if (currentOperator === "add") {
     return (displayOperations.textContent = add(+num1, +num2));
-  } else if (currentOperator == "subtract") {
+  } else if (currentOperator === "subtract") {
     return (displayOperations.textContent = subtract(+num1, +num2));
-  } else if (currentOperator == "multiply") {
+  } else if (currentOperator === "multiply") {
     return (displayOperations.textContent = multiply(+num1, +num2));
-  } else if (currentOperator == "divide") {
+  } else if (currentOperator === "divide") {
     return (displayOperations.textContent = divide(+num1, +num2));
   }
 }
