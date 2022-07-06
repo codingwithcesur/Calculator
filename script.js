@@ -10,11 +10,16 @@ let currentOperator = "";
 let somethingWentWrong = "";
 
 backspace.addEventListener("click", () => {
-  displayOperations.textContent = displayOperations.textContent.substring(
-    0,
-    displayOperations.textContent.length - 1
-  );
-  value1 = value1.substring(0, value1.length - 1);
+  if (displayOperations.textContent !== "Enter a number" && value1 !== "") {
+    displayOperations.textContent = displayOperations.textContent.substring(
+      0,
+      displayOperations.textContent.length - 1
+    );
+    value1 = value1.substring(0, value1.length - 1);
+    if (displayOperations.textContent === "") {
+      displayOperations.textContent = "Enter a number";
+    }
+  }
 });
 clearBtn.addEventListener("click", clear);
 numbers.forEach((number) => {
