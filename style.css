@@ -4,6 +4,7 @@ body {
   width: auto;
   align-items: center;
   justify-content: center;
+  background-color: rgba(94, 60, 33, 0.521);
 }
 .container {
   display: flex;
@@ -13,7 +14,7 @@ body {
   align-items: center;
   justify-content: center;
   border: 15px solid rgba(11, 11, 15, 0.61);
-  background-color: rgba(231, 195, 195, 0.349);
+  background-color: rgba(231, 195, 195, 0.877);
 }
 button {
   width: 60px;
@@ -26,11 +27,16 @@ button {
 }
 
 .display {
+  display: flex;
+  flex-direction: column-reverse;
   height: 110px;
   width: 240px;
   border: 10px solid rgba(49, 44, 58, 0.63);
   background-color: rgba(157, 142, 184, 0.5);
-  margin: 5px;
+  margin: 10px;
+}
+.display-operation {
+  font-size: 20px;
 }
 
 .btn-container {
