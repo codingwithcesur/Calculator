@@ -3,11 +3,19 @@ const operators = document.querySelectorAll(".operator");
 const displayOperations = document.getElementById("display-operation");
 const equals = document.querySelector(".equal");
 const clearBtn = document.querySelector(".clear");
+const backspace = document.querySelector(".backspace");
 let value1 = "";
 let value2 = "";
 let currentOperator = "";
 let somethingWentWrong = "";
 
+backspace.addEventListener("click", () => {
+  displayOperations.textContent = displayOperations.textContent.substring(
+    0,
+    displayOperations.textContent.length - 1
+  );
+  value1 = value1.substring(0, value1.length - 1);
+});
 clearBtn.addEventListener("click", clear);
 numbers.forEach((number) => {
   number.addEventListener("click", () => {
