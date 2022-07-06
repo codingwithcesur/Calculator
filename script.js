@@ -6,9 +6,15 @@ const clearBtn = document.querySelector(".clear");
 let value1 = "";
 let value2 = "";
 let currentOperator = "";
+let somethingWentWrong = "";
+
 clearBtn.addEventListener("click", clear);
 numbers.forEach((number) => {
   number.addEventListener("click", () => {
+    if (somethingWentWrong === true) {
+      clear();
+      somethingWentWrong = false;
+    }
     if (displayOperations.textContent === "Enter a number") {
       displayOperations.textContent = "";
     }
@@ -23,6 +29,7 @@ operators.forEach((operator) => {
       value1 = operate(value1, value2);
       value2 = "";
       currentOperator = operator.classList[1];
+      somethingWentWrong = "";
     }
     value2 = value1;
     value1 = "";
@@ -32,12 +39,14 @@ operators.forEach((operator) => {
 });
 equals.addEventListener("click", () => {
   operate(value1, value2);
+  somethingWentWrong = true;
 });
 
 function clear() {
   value1 = "";
   value2 = "";
   displayOperations.textContent = "Enter a number";
+  currentOperator = "";
 }
 function add(b, a) {
   return +(a + b);
