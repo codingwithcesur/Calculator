@@ -9,67 +9,6 @@ let value2 = "";
 let currentOperator = "";
 let somethingWentWrong = "";
 
-backspace.addEventListener("click", () => {
-  if (displayOperations.textContent !== "Enter a number" && value1 !== "") {
-    displayOperations.textContent = displayOperations.textContent.substring(
-      0,
-      displayOperations.textContent.length - 1
-    );
-    value1 = value1.substring(0, value1.length - 1);
-    if (displayOperations.textContent === "") {
-      displayOperations.textContent = "Enter a number";
-    }
-  }
-});
-clearBtn.addEventListener("click", clear);
-numbers.forEach((number) => {
-  number.addEventListener("click", () => {
-    if (somethingWentWrong === true) {
-      clear();
-      somethingWentWrong = false;
-    }
-    if (
-      displayOperations.textContent === "Enter a number" ||
-      displayOperations.textContent === "Stop trying to divide 0 by 0"
-    ) {
-      displayOperations.textContent = "";
-    }
-
-    displayOperations.textContent += number.textContent;
-    value1 += number.textContent;
-  });
-});
-operators.forEach((operator) => {
-  operator.addEventListener("click", () => {
-    if (
-      displayOperations.textContent === "Enter a number" ||
-      displayOperations.textContent === "Stop trying to divide 0 by 0"
-    ) {
-      displayOperations.textContent = "";
-    }
-    if (value2 !== "") {
-      value1 = operate(value1, value2);
-      value2 = "";
-      currentOperator = operator.classList[1];
-      somethingWentWrong = "";
-    }
-    value2 = value1;
-    value1 = "";
-    currentOperator = operator.classList[1];
-    displayOperations.textContent += operator.textContent;
-  });
-});
-equals.addEventListener("click", () => {
-  operate(value1, value2);
-  somethingWentWrong = true;
-});
-
-function clear() {
-  value1 = "";
-  value2 = "";
-  displayOperations.textContent = "Enter a number";
-  currentOperator = "";
-}
 function add(b, a) {
   return +(a + b);
 }
@@ -96,3 +35,71 @@ function operate(num1, num2) {
     return (displayOperations.textContent = divide(+num1, +num2));
   }
 }
+
+numbers.forEach((number) => {
+  number.addEventListener("click", () => {
+    if (somethingWentWrong === true) {
+      clear();
+      somethingWentWrong = false;
+    }
+    if (
+      displayOperations.textContent === "Enter a number" ||
+      displayOperations.textContent === "Stop trying to divide 0 by 0"
+    ) {
+      displayOperations.textContent = "";
+    }
+
+    displayOperations.textContent += number.textContent;
+    value1 += number.textContent;
+  });
+});
+operators.forEach((operator) => {
+  operator.addEventListener("click", () => {
+    let atOperating = displayOperations.textContent.charAt(
+      displayOperations.textContent.length - 1
+    );
+    if (atOperating != +atOperating) {
+      return;
+    }
+
+    if (
+      displayOperations.textContent === "Enter a number" ||
+      displayOperations.textContent === "Stop trying to divide 0 by 0"
+    ) {
+      displayOperations.textContent = "";
+    }
+    if (value2 !== "") {
+      value1 = operate(value1, value2);
+      value2 = "";
+      currentOperator = operator.classList[1];
+      somethingWentWrong = "";
+    }
+    value2 = value1;
+    value1 = "";
+    currentOperator = operator.classList[1];
+    displayOperations.textContent += operator.textContent;
+  });
+});
+equals.addEventListener("click", () => {
+  operate(value1, value2);
+  somethingWentWrong = true;
+});
+backspace.addEventListener("click", () => {
+  if (displayOperations.textContent !== "Enter a number" && value1 !== "") {
+    displayOperations.textContent = displayOperations.textContent.substring(
+      0,
+      displayOperations.textContent.length - 1
+    );
+    value1 = value1.substring(0, value1.length - 1);
+    if (displayOperations.textContent === "") {
+      displayOperations.textContent = "Enter a number";
+    }
+  }
+});
+function clear() {
+  value1 = "";
+  value2 = "";
+  displayOperations.textContent = "Enter a number";
+  currentOperator = "";
+}
+clearBtn.addEventListener("click", clear);
